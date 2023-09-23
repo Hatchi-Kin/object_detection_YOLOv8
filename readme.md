@@ -36,6 +36,7 @@
 ## La base de donnée est disponible sur roboflow:
 https://universe.roboflow.com/yolosafetygear/safety_gear_simplon/dataset/3
 
+
 ## Pour lancer l'application Flask ( dans un .venv ):
 
 ```
