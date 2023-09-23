@@ -1,5 +1,5 @@
 # Detection d'object avec YOLOv8
-pour plkus d'info --> rapport.pdf
+pour plus d'info --> rapport.pdf
 ## Structure du projet
 ```
 .
