@@ -34,5 +34,5 @@
 ```
 
 ## Pour lancer l'application Flask:
-```pip install requirements.txt
-python 07_app.py```
+```pip install requirements.txt```
+```python 07_app.py```
