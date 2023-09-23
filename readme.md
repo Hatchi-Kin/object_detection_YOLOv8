@@ -33,7 +33,7 @@
     └─── upload.html
 ```
 
-## Pour lancer l'application Flask:
+## Pour lancer l'application Flask ( dans un .venv ):
 ```
 pip install requirements.txt
 ```
