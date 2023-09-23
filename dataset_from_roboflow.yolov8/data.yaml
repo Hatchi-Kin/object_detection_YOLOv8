@@ -1,13 +1,0 @@
-train: ../train/images
-val: ../valid/images
-test: ../test/images
-
-nc: 5
-names: ['0 personne', '0 personne', '1 casque', '1 casque', '2 gilet']
-
-roboflow:
-  workspace: yolosafetygear
-  project: safety_gear_simplon
-  version: 3
-  license: CC BY 4.0
-  url: https://universe.roboflow.com/yolosafetygear/safety_gear_simplon/dataset/3
