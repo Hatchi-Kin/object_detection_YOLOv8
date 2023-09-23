@@ -1,0 +1,6 @@
+beautifulsoup4==4.12.2
+requests==2.31.0 
+opencv-python==4.8.0.76
+roboflow==1.1.7
+ultralytics==8.0.184
+Flask==2.3.3
