@@ -1,5 +1,5 @@
 # Detection d'object avec YOLOv8
-
+pour plkus d'info --> rapport.pdf
 ## Structure du projet
 ```
 .
@@ -17,6 +17,7 @@
 │
 ├─── 07_app.py
 ├─── requirements.txt
+├─── rapport.pdf
 │
 ├─── best_model
 │   └─── weights
