@@ -12,4 +12,4 @@ def print_directory_tree(path, prefix=''):
                 print(prefix + '├─── ' + file)
                 print_directory_tree(path + '/' + file, prefix + '│   ')
 
-print_directory_tree('.')
+# print_directory_tree('.')
