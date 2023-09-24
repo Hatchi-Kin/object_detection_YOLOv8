@@ -12,12 +12,13 @@ model = YOLO("best_model/weights/best.pt", task='detect')
 
 
 def detect_objects_on_image(buf, model):
-
+    # Predict objects in the image using the YOLO model
     results = model.predict(buf)
     result = results[0]
     output = []
     image = buf.copy()
 
+    # Loop through the detected objects and draw bounding boxes around them
     for box in result.boxes:
 
         x1, y1, x2, y2 = [round(x) for x in box.xyxy[0].tolist()]
@@ -35,12 +36,13 @@ def detect_objects_on_image(buf, model):
 
 
 ###################################################
-
+# Define a route for the homepage
 @app.route('/')
 def index():
     return render_template('upload.html')
 
 ###################################################
+# Define a route for detecting objects in an uploaded image
 
 @app.route('/detect', methods=['POST'])
 def detect_objects():
@@ -59,9 +61,7 @@ def detect_objects():
     return render_template('results.html', objects=boxes, image_file='image_with_boxes.jpg')
 
 ###################################################
-
-import time
-
+# Define a route for detecting objects in a webcam stream
 
 @app.route('/webcam')
 def webcam():
