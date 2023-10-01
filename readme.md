@@ -29,7 +29,7 @@ pour plus d'info --> rapport.pdf
 │   ├─── test01.jpg
 │   └─── test02.jpg
 │
-├─── templates
+└─── templates
     ├─── results.html
     └─── upload.html
 ```
