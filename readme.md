@@ -1,6 +1,6 @@
-# Detection d'object avec YOLOv8
-pour plus d'info --> rapport.pdf
-## Structure du projet
+# 📷 Detection d'object avec YOLOv8
+🔭 pour plus d'info --> rapport.pdf
+## 🌳  Structure du projet
 ```
 .
 ├─── dataset_from_roboflow.yolov8
@@ -34,17 +34,17 @@ pour plus d'info --> rapport.pdf
     └─── upload.html
 ```
 
-## La base de donnée est disponible sur roboflow:
+## 💾 La base de donnée est disponible sur roboflow:
  ```
 https://universe.roboflow.com/yolosafetygear/safety_gear_simplon/dataset/3
  ```
 
-## l'entrainement du modèle à été fait sur Google Colab:
+## 💪 L'entrainement du modèle à été fait sur Google Colab:
  ```
  https://colab.research.google.com/drive/1haVoMxOHWRqEHvxCUKGXXVGnhcuMjPEo
  ```
 
-## Pour lancer l'application Flask ( dans un .venv ):
+## 🏃  Pour lancer l'application Flask ( dans un .venv ):
 
 ```
 pip install requirements.txt
