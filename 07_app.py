@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, request
+from flask import Flask, Response, render_template, flash, redirect, request
 from ultralytics import YOLO
 from PIL import Image
 import cv2
@@ -60,24 +60,28 @@ def detect_objects():
 ###################################################
 # Define a route for detecting objects in a webcam stream
 
-@app.route('/webcam')
-def webcam():
-    cap = cv2.VideoCapture(0)
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            break
-        
-        boxes, image_with_boxes = detect_objects_on_image(frame, model)
+@app.route('/stream')
+def stream():
+    def generate():
+        cap = cv2.VideoCapture(0)
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                break
+            boxes, image_with_boxes = detect_objects_on_image(frame, model)
 
-        # Display the frame with detected objects
-        cv2.imshow('frame', image_with_boxes)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    
-    cap.release()
-    cv2.destroyAllWindows()
-    return render_template('upload.html')
+            # Encode the image as JPEG
+            _, buffer = cv2.imencode('.jpg', image_with_boxes)
+            frame = buffer.tobytes()
+
+            # Use a generator to stream the encoded frame
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+        cap.release()
+
+    return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 
 ###################################################
