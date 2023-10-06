@@ -66,14 +66,13 @@ def stream():
         cap = cv2.VideoCapture(0)
         while True:
             ret, frame = cap.read()
+            
             if not ret:
                 break
             boxes, image_with_boxes = detect_objects_on_image(frame, model)
-
             # Encode the image as JPEG
             _, buffer = cv2.imencode('.jpg', image_with_boxes)
             frame = buffer.tobytes()
-
             # Use a generator to stream the encoded frame
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
@@ -81,8 +80,6 @@ def stream():
         cap.release()
 
     return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
 
 ###################################################
 
