@@ -4,7 +4,6 @@
 ```
 OBJECT_DETECTION_YOLOV8
 ├── app.py
-├── tree.txt
 ├── rapport.pdf
 ├── readme.md
 ├── requirements.txt
