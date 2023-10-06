@@ -2,36 +2,31 @@
 🔭 pour plus d'info --> rapport.pdf
 ## 🌳  Structure du projet
 ```
-.
-├─── dataset_from_roboflow.yolov8
-│   ├─── test
-│   ├─── train
-│   └─── valid
+OBJECT_DETECTION_YOLOV8
+├── app.py
+├── tree.txt
+├── rapport.pdf
+├── readme.md
+├── requirements.txt
 │
-├─── 01_scraping.py
-├─── 02_data_harvest.py
-├─── 03_resize.py
-├─── 04_random_check.ipynb
-├─── 05_train_yolov8.ipynb
-├─── 06_test_display_results.py
-│
-├─── 07_app.py
-├─── requirements.txt
-├─── rapport.pdf
-│
-├─── best_model
-│   └─── weights
-│       └─── best.pt
-│
-├─── static
-│   ├─── css
-│   ├─── image_with_boxes.jpg
-│   ├─── test01.jpg
-│   └─── test02.jpg
-│
-└─── templates
-    ├─── results.html
-    └─── upload.html
+├── best_model
+│   ├── confusion_matrix_normalized.png
+│   └── weights
+│       └── best.pt
+├── model
+│   ├── 01_scraping.py
+│   ├── 02_data_harvest.py
+│   ├── 03_resize.py
+│   ├── 04_random_check.ipynb
+│   ├── 05_train_yolov8.ipynb
+│   └── 06_test_display_results.py
+├── static
+│   ├── image_with_boxes.jpg
+│   ├── test01.jpg
+│   └── test02.jpg
+└── templates
+    ├── results.html
+    └── upload.html
 ```
 
 ## 💾 La base de donnée est disponible sur roboflow:
@@ -51,5 +46,5 @@ pip install requirements.txt
 ```
 
 ```
-python 07_app.py
+python app.py
 ```
