@@ -28,7 +28,7 @@ def detect_objects_on_image(buf, model):
             label = f"{result.names[class_id]}: {prob}"
             label_size, _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.8, 2)
             cv2.putText(image, label, (x1 + 6, y1 + label_size[1] + label_size[1] + 6), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 3)
+            cv2.rectangle(image, (x1, y1), (x2, y2), (255, 185, 0), 3)
 
     return output, image
 
