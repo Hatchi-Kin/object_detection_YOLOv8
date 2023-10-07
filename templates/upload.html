@@ -1,71 +1,93 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>YOLOv8</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-.w3-row-padding img {margin-bottom: 12px}
-.bgimg {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100%;
-}
-</style>
-</head>
-<body>
+  <head>
+    <title>YOLOv8</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      body,h1,h2,h3,h4,h5,h6 {
+      font-family: "Montserrat", sans-serif}
+      .w3-row-padding img {
+      margin-bottom: 12px
+      }
+      .bgimg {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      min-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <!-- Page Content -->
+    <div class="w3-main w3-padding-large">
 
+      <!-- Header -->
+      <header class="w3-container w3-center" style="padding:60px" id="home">
+      <h1 class="w3-xxxlarge"><b><a href="{{ url_for('index') }}">Safety Gear Detection</a></b></h1>
+      <p>with Ultralytics YOLOv8.</p>
 
-<!-- Page Content -->
-<div class="w3-main w3-padding-large">
-
-  <!-- Header -->
-    <header class="w3-container w3-center" style="padding:60px" id="home">
-    <h1 class="w3-xxxlarge"><b><a href="{{ url_for('index') }}">Safety Gear Detection</a></b></h1>
-    <p>with Ultralytics YOLOv8.</p>
-
-     <!-- Upload form -->
+      <!-- Upload form -->
       <div class="w3-container w3-padding-48 w3-center w3-light-grey">
-        <h2>Upload Image</h1>
-          <form class="w3-container " action="{{ url_for('detect_objects') }}" method="post" enctype="multipart/form-data">
-            <input type="file" name="image" style="margin:14px">
-            <input type="submit" value="Detect Objects" style="margin:14px">
-          </form>
+        <h2>Upload Image</h2>
+        <form class="w3-container" method="POST" action="/detect" enctype="multipart/form-data"
+          onsubmit="return checkImageSelected()">
+          <input type="file" name="image" id="image" style="margin:14px">
+          <input type="submit" value="Detect Objects" style="margin:14px">
+        </form>
+        {% if image_file %}
+        <img src="{{ image_file }}" alt="Detected Objects">
+        <ul class="w3-ul w3-margin">
+          {% for box in objects %}
+          <li>{{ box[4] }}: {{ box[5] }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+
+      <!-- Use Webcam -->
+      <div class="w3-container w3-padding-36 w3-center w3-light-grey">
+        <h2>Or</h2>
+        <button id="startBtn" class="w3-btn w3-xxlarge w3-round-large w3-white w3-border w3-margin-right w3-card">Start
+        Webcam</button>
+        <button id="stopBtn" class="w3-btn w3-xxlarge w3-round-large w3-white w3-border w3-margin-left w3-card">Stop
+        Webcam</button>
+        <div class="w3-container w3-padding-48 w3-center">
+          <img id="streamImg" />
         </div>
-        
-        
-        <!-- Use Webcam -->
-        <div class="w3-container w3-padding-36 w3-center w3-light-grey">
-          <h2>Or</h2>
-          <button id="startBtn" class="w3-btn w3-xxlarge w3-round-large w3-white w3-border w3-margin-right w3-card">Start Webcam</button>
-          <button id="stopBtn" class="w3-btn w3-xxlarge w3-round-large w3-white w3-border w3-margin-left w3-card">Stop Webcam</button>
-          <div class="w3-container w3-padding-48 w3-center">
-            <img id="streamImg" />
-          </div>
-        </div>
-  
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-36 w3-center w3-opacity w3-large" style="margin:28px">
-    <i class="fa fa-github w3-hover-opacity w3-jumbo"></i>
-    <p class="w3-medium">Powered by <a href="https://github.com/Hatchi-Kin/object_detection_YOLOv8" target="_blank" class="w3-hover-text-green">Hatchi-Kin</a></p>
-  <!-- End footer -->
-  </footer>
-  
-<!-- END PAGE CONTENT -->
-</div>
-<script>
-  document.getElementById('startBtn').onclick = function() {
-      document.getElementById('streamImg').src = "{{ url_for('stream') }}";
-  };
-  
-  document.getElementById('stopBtn').onclick = function() {
-      document.getElementById('streamImg').src = "";
-  };
-  </script>
-</body>
+      </div>
+
+      <!-- Footer -->
+      <footer class="w3-container w3-padding-36 w3-center w3-opacity w3-large" style="margin:28px">
+        <i class="fa fa-github w3-jumbo"></i>
+        <p class="w3-medium">Powered by <a href="https://github.com/Hatchi-Kin/object_detection_YOLOv8" target="_blank"
+          class="w3-hover-text-green">Hatchi-Kin</a></p>
+      </footer>
+
+      <!-- Dirty Javascript -->
+    </div>
+    <script>
+      function checkImageSelected() {
+        var image = document.getElementById("image");
+        if (image.value == "") {
+          alert("Please select an image file.");
+          return false;
+        }
+        return true;
+      }
+    </script>
+    <script>
+      document.getElementById('startBtn').onclick = function () {
+        document.getElementById('streamImg').src = "{{ url_for('stream') }}";
+      };
+      
+      document.getElementById('stopBtn').onclick = function () {
+        document.getElementById('streamImg').src = "";
+      };
+    </script>
+  </body>
 </html>

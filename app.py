@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template, flash, redirect, request
+from flask import Flask, Response, render_template, request
 from ultralytics import YOLO
 from PIL import Image
 import cv2
@@ -26,11 +26,12 @@ def detect_objects_on_image(buf, model):
             class_id = box.cls[0].item()
             output.append([x1, y1, x2, y2, result.names[class_id], prob])
             label = f"{result.names[class_id]}: {prob}"
-            label_size, _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
-            cv2.putText(image, label, (x1 + 6, y1 + label_size[1] + label_size[1] + 6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
-            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 255), 2)
+            label_size, _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.8, 2)
+            cv2.putText(image, label, (x1 + 6, y1 + label_size[1] + label_size[1] + 6), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 3)
 
     return output, image
+
 
 ###################################################
 # Define a route for the homepage
@@ -43,19 +44,17 @@ def index():
 
 @app.route('/detect', methods=['POST'])
 def detect_objects():
-    if 'image' not in request.files:
-        flash('No image uploaded')
-        return redirect(request.url)
     
     image_file = request.files['image']
     image = cv2.imread(image_file)
-    
     boxes, image_with_boxes = detect_objects_on_image(image, model)
 
+    # Save the image with boxes to a file
     image_with_boxes = Image.fromarray(cv2.cvtColor(image_with_boxes, cv2.COLOR_BGR2RGB))
-    image_with_boxes.save('static/image_with_boxes.jpg')
+    filename = 'static/image_with_boxes.jpg'
+    image_with_boxes.save(filename)
     
-    return render_template('results.html', objects=boxes, image_file='image_with_boxes.jpg')
+    return render_template('upload.html', objects=boxes, image_file=filename)
 
 ###################################################
 # Define a route for detecting objects in a webcam stream
@@ -66,7 +65,6 @@ def stream():
         cap = cv2.VideoCapture(0)
         while True:
             ret, frame = cap.read()
-            
             if not ret:
                 break
             boxes, image_with_boxes = detect_objects_on_image(frame, model)

@@ -24,7 +24,6 @@ OBJECT_DETECTION_YOLOV8
 │   ├── test01.jpg
 │   └── test02.jpg
 └── templates
-    ├── results.html
     └── upload.html
 ```
 
@@ -38,7 +37,7 @@ https://universe.roboflow.com/yolosafetygear/safety_gear_simplon/dataset/3
  https://colab.research.google.com/drive/1haVoMxOHWRqEHvxCUKGXXVGnhcuMjPEo
  ```
 
-## 🏃  Pour lancer l'application Flask ( dans un .venv ):
+## 🏃  Pour lancer l'application Flask:
 
 ```
 pip install requirements.txt
