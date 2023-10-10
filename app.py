@@ -2,7 +2,6 @@ from flask import Flask, Response, render_template, request
 from ultralytics import YOLO
 from PIL import Image
 import cv2
-import time
 
 
 app = Flask(__name__)
