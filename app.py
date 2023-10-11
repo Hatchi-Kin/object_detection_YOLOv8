@@ -64,7 +64,6 @@ def detect_objects_on_image(buf, model):
                     cv2.FONT_HERSHEY_SIMPLEX, 1.1, (255, 255, 255), 2, cv2.LINE_AA)
     return output, image
 
-
 ###################################################
 # Define a route for the homepage
 
