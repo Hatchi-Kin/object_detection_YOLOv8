@@ -99,7 +99,7 @@ def stream():
             ret, frame = cap.read()
             if not ret:
                 break
-            boxes, image_with_boxes = detect_objects_on_image(frame, model)
+            _, image_with_boxes = detect_objects_on_image(frame, model)
             # Encode the image as JPEG
             _, buffer = cv2.imencode('.jpg', image_with_boxes)
             frame = buffer.tobytes()
