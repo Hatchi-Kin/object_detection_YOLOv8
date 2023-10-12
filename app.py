@@ -44,7 +44,7 @@ def check_equipment_completion(obj_count):
         personne_count = obj_count['0 personne']
         gilet_count = obj_count.get('2 gilet', 0)
         casque_count = obj_count.get('1 casque', 0)
-        if personne_count > gilet_count + 2 * casque_count:
+        if personne_count * 2 > gilet_count + casque_count:
             label = 'equipment incomplet'
             return label
     return None
