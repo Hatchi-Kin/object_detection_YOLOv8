@@ -3,7 +3,7 @@
 
 YOLOv8 est un modèle de détection d'objets populaire qui est connu pour sa vitesse et sa précision. Il est disponible dans plusieurs variantes, dont YOLOv8n, qui est une version plus légère et plus rapide.
 
-Cette web app Flask utilise un YOLOV8n fine-tuné sur un custom dataset et permet de détecter la présence de gilets et de casques de sécurité sur des images.
+Cette web app Flask utilise un YOLOV8n fine-tuné sur un custom dataset et permet de détecter la présence de gilets et de casques de sécurité sur des images. 👷
 
 ## 🌳  Structure du projet
 ```
